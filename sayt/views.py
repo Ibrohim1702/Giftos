@@ -10,10 +10,28 @@ def index(requests):
     ctx = {}
     product = Product.objects.all().order_by('-pk')
     if requests.POST:
+        if "email" in requests.POST:
+            email = requests.POST.get('email')
+            Email.objects.create(
+                email=email
+            )
+
+        name = requests.POST.get('name')
+        message = requests.POST.get('message')
+        phone = requests.POST.get('phone')
         email = requests.POST.get('email')
-        Email.objects.create(
-            email=email
+        Contact.objects.create(
+            name=name, message=message, phone=phone, email=email
         )
+    ctx = {
+        'products': product,
+        "contact": contact
+    }
+    return render(requests, "index.html", ctx)
+
+
+def contact(requests):
+    ctx = {}
     if requests.POST:
         name = requests.POST.get('name')
         message = requests.POST.get('message')
@@ -22,37 +40,44 @@ def index(requests):
         Contact.objects.create(
             name=name, message=message, phone=phone, email=email
         )
+
         ctx = {
-            "email": email,
-            'products': product,
-            "contact": contact
+            "contact": contact,
+
         }
-    return render(requests, "index.html", ctx)
-
-
-def contact(requests):
-    ctx = {
-
-    }
     return render(requests, "contact.html", ctx)
 
 
 def shop(requests):
+    ctx = {}
+    product = Product.objects.all().order_by('-pk')
     ctx = {
-
+        'products': product,
     }
     return render(requests, "shop.html", ctx)
 
 
 def testimonial(requests):
-    ctx = {
-
-    }
+    ctx = {}
+    if requests.POST:
+        email = requests.POST.get('email')
+        Email.objects.create(
+            email=email
+        )
+        ctx = {
+            "email": email
+        }
     return render(requests, "testimonial.html", ctx)
 
 
 def why(requests):
-    ctx = {
-
-    }
+    ctx = {}
+    if requests.POST:
+        email = requests.POST.get('email')
+        Email.objects.create(
+            email=email
+        )
+        ctx = {
+            "email": email
+        }
     return render(requests, "why.html", ctx)
