@@ -1,11 +1,15 @@
 from django.shortcuts import render
 
+from sayt.models import Product
+
+
 # Create your views here.
 
 
 def index(requests):
+    product = Product.objects.all().order_by('-pk')
     ctx = {
-
+        'products': product[1:],
     }
     return render(requests, "index.html", ctx)
 
