@@ -199,7 +199,7 @@
         </h2>
       </div>
       <div class="row">
-        {% for i in product %}
+        {% for i in products %}
             <div class="col-sm-6 col-md-4 col-lg-3">
             <div class="box">
               <a href="">
@@ -591,18 +591,19 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-5 px-0">
-          <form action="#">
+          <form action="" method="post">
+            {% csrf_token %}
             <div>
-              <input type="text" placeholder="Name" />
+              <input type="text" placeholder="Name" name="name" />
             </div>
             <div>
-              <input type="email" placeholder="Email" />
+              <input type="email" placeholder="Email" name="email" />
             </div>
             <div>
-              <input type="text" placeholder="Phone" />
+              <input type="text" placeholder="Phone" name="phone" />
             </div>
             <div>
-              <input type="text" class="message-box" placeholder="Message" />
+              <input type="text" class="message-box" placeholder="Message" name="message" />
             </div>
             <div class="d-flex ">
               <button>
@@ -734,8 +735,9 @@
               <h5>
                 Newsletter
               </h5>
-              <form action="#">
-                <input type="email" placeholder="Enter your email">
+              <form action="" method="post">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="Enter your email">
                 <button>
                   Subscribe
                 </button>
